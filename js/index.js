@@ -1,3 +1,3 @@
 window.onload = function() {
-  Game.start("canvas");
+  Game.init("canvas");
 };

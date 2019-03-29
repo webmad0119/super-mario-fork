@@ -7,14 +7,17 @@ var Game = {
     TOP_KEY : 38,
     SPACE : 32
   },
-  start: function (canvadId) {
+  init: function (canvadId){
     this.canvas = document.getElementById(canvadId);
     this.ctx = this.canvas.getContext("2d");
+    this.start();
+  },
+  start: function () {
     this.fps = 60;
 
     this.reset();
 
-    this.interval = setInterval(function () {
+    this.interval = setInterval( () =>{
       this.clear();
 
       this.framesCounter++;
@@ -40,7 +43,7 @@ var Game = {
       if (this.isCollision()) {
         this.gameOver();
       }
-    }.bind(this), 1000 / this.fps);
+    }, 1000 / this.fps);
   },
   stop: function () {
     clearInterval(this.interval);
@@ -68,13 +71,13 @@ var Game = {
     // colisiones genéricas 
     // (p.x + p.w > o.x && o.x + o.w > p.x && p.y + p.h > o.y && o.y + o.h > p.y )
     // esto chequea que el personaje no estén en colisión con cualquier obstáculo
-    return this.obstacles.some(function (obstacle) {
+    return this.obstacles.some( (obstacle) =>{
       return (
         ((this.player.x + this.player.w) >= obstacle.x &&
           this.player.x < (obstacle.x + obstacle.w) &&
           this.player.y + (this.player.h - 20) >= obstacle.y)
       );
-    }.bind(this));
+    });
   },
   //esto elimina los obstáculos del array que estén fuera de la pantalla
   clearObstacles: function () {
